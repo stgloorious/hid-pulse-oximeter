@@ -26,7 +26,9 @@ device.connect()
 
 try:
     while True:
-        device.getData()
+        if device.bpmAvailable() and device.spo2Available():
+            logger.info(f' BPM:{device.getBpm()} SpO2:{device.getSpo2()}')
+
 except KeyboardInterrupt:
     device.cleanup()
 

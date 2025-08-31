@@ -74,6 +74,11 @@ class HID(Transport):
         self.setTime(datetime(2025, 8, 30, 16, 24, 25))
         self.configure()
 
+    def setBpmQueue(self, bpm_queue):
+        self.bpm_data = bpm_queue
+
+    def setSpo2Queue(self, spo2_queue):
+        self.spo2_data = spo2_queue
 
     def configure(self):
         data = [0x80] + [0x00] * 63
@@ -115,12 +120,11 @@ class HID(Transport):
         if data[:4] == b'eb01':
             bpm = int(data[6:8],16)
             spo2 = int(data[8:10],16)
-            if bpm == 127:
-                bpm = '-'
-            if spo2 == 127:
-                spo2 = '-'
+            if bpm < 127:
+                self.bpm_data.put(bpm)
+            if spo2 < 127:
+                self.spo2_data.put(spo2)
 
-            logger.info(f'BPM:{bpm} SpO2:{spo2}%')
             return
         if data[:4] == b'eb00':
             values = [data[i+4:i+12] for i in range(0, 36, 12)]
@@ -152,4 +156,3 @@ class HID(Transport):
             if data:
                 logger.debug(f"PC->Device: {binascii.hexlify(bytearray(data)).decode()}")
                 self.hid.write(data)
-                #self.tx_queue.task_done()
