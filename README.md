@@ -17,6 +17,7 @@ pip install -r requirements.txt
 ## Usage
 After connecting the device and turning it on, you can run the application:
 ```
+cd src
 ./hid-pulse-oximeter.py
 ```
 
@@ -27,13 +28,15 @@ INFO:beurer.po:Found HID device 'Pulse Oximeter' (0x28e9,0x28a,1-4:1.0)
 INFO:__main__:Connecting to first device
 INFO:beurer.transport.hid:Connected to 'Pulse Oximeter' by '        '
 INFO:beurer.transport.hid:Username:    user
-INFO:beurer.transport.hid:BPM:- SpO2:-%
-INFO:beurer.transport.hid:BPM:85 SpO2:96%
-INFO:beurer.transport.hid:BPM:87 SpO2:96%
-INFO:beurer.transport.hid:BPM:90 SpO2:96%
-INFO:beurer.transport.hid:BPM:91 SpO2:95%
-INFO:beurer.transport.hid:BPM:90 SpO2:94%
-INFO:beurer.transport.hid:BPM:90 SpO2:95%
+INFO:__main__: BPM:94 SpO2:96
+INFO:__main__: BPM:94 SpO2:96
+INFO:__main__: BPM:94 SpO2:96
+INFO:__main__: BPM:94 SpO2:95
+INFO:__main__: BPM:95 SpO2:95
+INFO:__main__: BPM:94 SpO2:95
+INFO:__main__: BPM:94 SpO2:95
+INFO:__main__: BPM:93 SpO2:95
+INFO:__main__: BPM:92 SpO2:95
 ```
 
 ## Disclaimer
