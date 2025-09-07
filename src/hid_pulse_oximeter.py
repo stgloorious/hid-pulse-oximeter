@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
+"""
+Example script that connects to the Beurer PO 80 pulse oximeter over USB HID
+and prints out live BPM and SpO2 values.
+"""
 
-import hid
 import sys
-import binascii
-import time
-
 import logging
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
 
 from beurer.po import discover
 
-running = True
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO)
 
 logger.info('Discovering devices...')
 devices = discover()
@@ -26,10 +25,8 @@ device.connect()
 
 try:
     while True:
-        if device.bpmAvailable() and device.spo2Available():
-            logger.info(f' BPM:{device.getBpm()} SpO2:{device.getSpo2()}')
+        if device.bpm_available() and device.spo2_available():
+            logger.info('BPM: %s SpO2: %s%%', device.get_bpm(), device.get_spo2())
 
 except KeyboardInterrupt:
     device.cleanup()
-
-
