@@ -1,0 +1,8 @@
+[MASTER]
+# Allow pylint to discover packages inside the "src" directory
+init-hook='import sys; sys.path.insert(0, "src")'
+ignore-patterns=test_.*\.py
+py-version=3.12
+
+[TYPECHECK]
+extension-pkg-allow-list=hid
